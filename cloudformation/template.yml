@@ -75,8 +75,6 @@ Resources:
 
   MyDynamoDBTable:
     Type: AWS::DynamoDB::Table
-    DeletionPolicy: Retain
-    UpdateReplacePolicy: Retain
     Properties:
       TableName: MyDynamoDBTable
       BillingMode: PAY_PER_REQUEST
