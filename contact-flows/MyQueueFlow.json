@@ -1,0 +1,75 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "098007b7-e257-4b7c-9c3c-741d4680517d",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 242.4,
+      "y": 172
+    },
+    "ActionMetadata": {
+      "90ed9d60-5450-4304-842b-f3d13944f55b": {
+        "position": {
+          "x": 632,
+          "y": 241.6
+        }
+      },
+      "098007b7-e257-4b7c-9c3c-741d4680517d": {
+        "position": {
+          "x": 376.8,
+          "y": 171.2
+        },
+        "parameters": {
+          "Messages": [
+            {
+              "PromptId": {
+                "displayName": null
+              }
+            }
+          ]
+        },
+        "audio": [
+          {
+            "id": "arn:aws:connect:eu-west-2:966199403621:instance/ab040630-8ffb-47ff-a80a-c4d03b45ec03/prompt/13703c77-4609-40e7-b09f-8265e78c859c",
+            "text": null,
+            "type": "Prompt"
+          }
+        ]
+      }
+    },
+    "Annotations": [],
+    "name": "MyQueueFlow",
+    "description": "Audio played when a customer is waiting in queue.",
+    "type": "customerQueue",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {},
+      "Identifier": "90ed9d60-5450-4304-842b-f3d13944f55b",
+      "Type": "EndFlowExecution",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Messages": [
+          {
+            "PromptId": "arn:aws:connect:eu-west-2:966199403621:instance/ab040630-8ffb-47ff-a80a-c4d03b45ec03/prompt/13703c77-4609-40e7-b09f-8265e78c859c"
+          }
+        ],
+        "ContinueMessagingDuringInterrupt": "false"
+      },
+      "Identifier": "098007b7-e257-4b7c-9c3c-741d4680517d",
+      "Type": "MessageParticipantIteratively",
+      "Transitions": {
+        "NextAction": "90ed9d60-5450-4304-842b-f3d13944f55b",
+        "Errors": [
+          {
+            "NextAction": "90ed9d60-5450-4304-842b-f3d13944f55b",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}

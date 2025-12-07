@@ -1,0 +1,319 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "e6855d7f-a379-44e4-ba77-37419e195be5",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 38.4,
+      "y": 56
+    },
+    "ActionMetadata": {
+      "2dd8d75b-0ebe-4715-a301-f37b507873b3": {
+        "position": {
+          "x": 272.8,
+          "y": 571.2
+        }
+      },
+      "36814f37-a919-44ad-9f8d-91197a458f93": {
+        "position": {
+          "x": 204.8,
+          "y": 324
+        },
+        "dynamicParams": []
+      },
+      "e6855d7f-a379-44e4-ba77-37419e195be5": {
+        "position": {
+          "x": 148,
+          "y": 64
+        },
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "4722de85-dddf-4db7-8ff3-8030e1e7f2dd",
+            "operator": {
+              "name": "Contains",
+              "value": "Contains",
+              "shortDisplay": "contains"
+            },
+            "value": "M-F_0900-1500"
+          },
+          {
+            "id": "35f2bb8a-f0fd-4e8b-a80f-cf164d5b580e",
+            "operator": {
+              "name": "Contains",
+              "value": "Contains",
+              "shortDisplay": "contains"
+            },
+            "value": "Tue_0900-0930"
+          }
+        ]
+      },
+      "dba283ba-2eda-4185-a027-9356ee862cfb": {
+        "position": {
+          "x": 492,
+          "y": 257.6
+        },
+        "parameters": {
+          "HoursOfOperationId": {
+            "displayName": "Tue_0900-0930"
+          }
+        },
+        "Hours": {
+          "id": "arn:aws:connect:eu-west-2:966199403621:instance/ab040630-8ffb-47ff-a80a-c4d03b45ec03/operating-hours/89483675-86c5-42c5-8176-89d9d56ef6d5",
+          "text": "Tue_0900-0930"
+        }
+      },
+      "7cb390e3-79bf-4473-8a61-d1a4cf64fa47": {
+        "position": {
+          "x": 490.4,
+          "y": -4
+        },
+        "parameters": {
+          "HoursOfOperationId": {
+            "displayName": "M-F_0900-1500"
+          }
+        },
+        "Hours": {
+          "id": "arn:aws:connect:eu-west-2:966199403621:instance/ab040630-8ffb-47ff-a80a-c4d03b45ec03/operating-hours/15931a91-2569-49a1-965f-982c68b6c1aa",
+          "text": "M-F_0900-1500"
+        }
+      },
+      "43ddc038-f8ac-41d8-b2ce-e545e075cf19": {
+        "position": {
+          "x": 895.2,
+          "y": 174.4
+        },
+        "dynamicParams": []
+      },
+      "aaab0e00-f855-443f-98e0-dbcb8d99cfb3": {
+        "position": {
+          "x": 781.6,
+          "y": 485.6
+        },
+        "dynamicParams": []
+      },
+      "e5064078-1c8d-4759-bda4-72ce75cdd075": {
+        "position": {
+          "x": 1149.6,
+          "y": 424.8
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "CheckHours",
+    "description": "",
+    "status": "published",
+    "settings": {
+      "input": {},
+      "resultData": {},
+      "transitions": {
+        "results": []
+      }
+    },
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "Result": "Open",
+        "ResultData": {
+          "ooh": false
+        }
+      },
+      "Identifier": "2dd8d75b-0ebe-4715-a301-f37b507873b3",
+      "Type": "EndFlowModuleExecution",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "ooh": "no_match"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "36814f37-a919-44ad-9f8d-91197a458f93",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "2dd8d75b-0ebe-4715-a301-f37b507873b3",
+        "Errors": [
+          {
+            "NextAction": "2dd8d75b-0ebe-4715-a301-f37b507873b3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.hoop-name"
+      },
+      "Identifier": "e6855d7f-a379-44e4-ba77-37419e195be5",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "36814f37-a919-44ad-9f8d-91197a458f93",
+        "Conditions": [
+          {
+            "NextAction": "7cb390e3-79bf-4473-8a61-d1a4cf64fa47",
+            "Condition": {
+              "Operator": "TextContains",
+              "Operands": [
+                "M-F_0900-1500"
+              ]
+            }
+          },
+          {
+            "NextAction": "dba283ba-2eda-4185-a027-9356ee862cfb",
+            "Condition": {
+              "Operator": "TextContains",
+              "Operands": [
+                "Tue_0900-0930"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "36814f37-a919-44ad-9f8d-91197a458f93",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "HoursOfOperationId": "arn:aws:connect:eu-west-2:966199403621:instance/ab040630-8ffb-47ff-a80a-c4d03b45ec03/operating-hours/89483675-86c5-42c5-8176-89d9d56ef6d5"
+      },
+      "Identifier": "dba283ba-2eda-4185-a027-9356ee862cfb",
+      "Type": "CheckHoursOfOperation",
+      "Transitions": {
+        "NextAction": "aaab0e00-f855-443f-98e0-dbcb8d99cfb3",
+        "Conditions": [
+          {
+            "NextAction": "43ddc038-f8ac-41d8-b2ce-e545e075cf19",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "True"
+              ]
+            }
+          },
+          {
+            "NextAction": "aaab0e00-f855-443f-98e0-dbcb8d99cfb3",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "False"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "aaab0e00-f855-443f-98e0-dbcb8d99cfb3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "HoursOfOperationId": "arn:aws:connect:eu-west-2:966199403621:instance/ab040630-8ffb-47ff-a80a-c4d03b45ec03/operating-hours/15931a91-2569-49a1-965f-982c68b6c1aa"
+      },
+      "Identifier": "7cb390e3-79bf-4473-8a61-d1a4cf64fa47",
+      "Type": "CheckHoursOfOperation",
+      "Transitions": {
+        "NextAction": "aaab0e00-f855-443f-98e0-dbcb8d99cfb3",
+        "Conditions": [
+          {
+            "NextAction": "43ddc038-f8ac-41d8-b2ce-e545e075cf19",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "True"
+              ]
+            }
+          },
+          {
+            "NextAction": "aaab0e00-f855-443f-98e0-dbcb8d99cfb3",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "False"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "aaab0e00-f855-443f-98e0-dbcb8d99cfb3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "ooh": "false"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "43ddc038-f8ac-41d8-b2ce-e545e075cf19",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "e5064078-1c8d-4759-bda4-72ce75cdd075",
+        "Errors": [
+          {
+            "NextAction": "e5064078-1c8d-4759-bda4-72ce75cdd075",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "ooh": "true"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "aaab0e00-f855-443f-98e0-dbcb8d99cfb3",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "e5064078-1c8d-4759-bda4-72ce75cdd075",
+        "Errors": [
+          {
+            "NextAction": "e5064078-1c8d-4759-bda4-72ce75cdd075",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Result": "Open",
+        "ResultData": {
+          "ooh": false
+        }
+      },
+      "Identifier": "e5064078-1c8d-4759-bda4-72ce75cdd075",
+      "Type": "EndFlowModuleExecution",
+      "Transitions": {}
+    }
+  ],
+  "Settings": {
+    "InputParameters": [],
+    "OutputParameters": [],
+    "Transitions": [
+      {
+        "DisplayName": "Success",
+        "ReferenceName": "Success",
+        "Description": ""
+      },
+      {
+        "DisplayName": "Error",
+        "ReferenceName": "Error",
+        "Description": ""
+      }
+    ]
+  }
+}
